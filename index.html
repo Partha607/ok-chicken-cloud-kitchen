@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Kitchen KDS - Technical Blueprint</title>
+    <title>Cloud Kitchen KDS - Technical Blueprint (Laravel Edition)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         .gradient-text {
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            background: linear-gradient(90deg, #f9322c, #f97316);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -22,19 +22,19 @@
 <body class="bg-slate-50 text-slate-800 antialiased">
 
     <!-- Navigation -->
-    <nav class="fixed w-full bg-white/90 backdrop-blur shadow-sm z-50">
+    <nav class="fixed w-full bg-white/90 backdrop-blur shadow-sm z-50 border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex-shrink-0 flex items-center gap-2">
-                    <i class="fa-solid fa-fire-burner text-blue-600 text-2xl"></i>
-                    <span class="font-bold text-xl tracking-tight">KDS<span class="text-blue-600">Blueprint</span></span>
+                    <i class="fa-solid fa-fire-burner text-orange-600 text-2xl"></i>
+                    <span class="font-bold text-xl tracking-tight">KDS<span class="text-orange-600">Blueprint</span></span>
                 </div>
                 <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
-                    <a href="#overview" class="hover:text-blue-600 transition">Overview</a>
-                    <a href="#architecture" class="hover:text-blue-600 transition">Architecture</a>
-                    <a href="#data-model" class="hover:text-blue-600 transition">Data Model</a>
-                    <a href="#ui-design" class="hover:text-blue-600 transition">UI/UX Rules</a>
-                    <a href="#budget" class="hover:text-blue-600 transition">2L Budget Plan</a>
+                    <a href="#overview" class="hover:text-orange-600 transition">Overview</a>
+                    <a href="#ingestion-technique" class="hover:text-orange-600 transition">Ingestion Technique</a>
+                    <a href="#architecture" class="hover:text-orange-600 transition">Architecture</a>
+                    <a href="#data-model" class="hover:text-orange-600 transition">Data Model</a>
+                    <a href="#budget" class="hover:text-orange-600 transition">Lean Budget</a>
                 </div>
             </div>
         </div>
@@ -42,129 +42,140 @@
 
     <!-- Hero Section -->
     <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
-        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-sm font-semibold mb-6">
-            <i class="fa-solid fa-bullseye"></i> Budget Target: Under ₹2,00,000 INR
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-sm font-semibold mb-6">
+            <i class="fa-solid fa-code"></i> Strict Open-Source Stack: PHP/Laravel + MySQL
         </span>
         <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
             Order Aging Display System <br/>
-            <span class="gradient-text">Lean MVP Engineering Plan</span>
+            <span class="gradient-text">Lean Web MVP Plan</span>
         </h1>
         <p class="mt-4 text-xl text-slate-600 max-w-3xl mx-auto">
-            An air-tight, reliable, and cost-effective Kitchen Display System (KDS) designed specifically for cloud kitchens. Zero direct platform API dependencies, built for raw operational speed and strict reliability.
+            A reliable, zero-API Kitchen Display System (KDS) strictly using open-source web technologies. Built to intercept emails/SMS, parse them into structured orders, and dictate kitchen flow with dynamic color timers.
         </p>
     </section>
 
-    <!-- Core Philosophy -->
-    <section id="overview" class="py-16 bg-white border-t border-slate-200">
+    <!-- Ingestion Technique (Deep Dive) -->
+    <section id="ingestion-technique" class="py-16 bg-white border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fa-solid fa-bolt text-blue-600 text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold mb-2">Operational Control</h3>
-                    <p class="text-slate-600 text-sm">Eliminates missed orders and dependency on mobile apps. One central screen dictates kitchen flow.</p>
+            <h2 class="text-3xl font-bold mb-4 text-center">How It Works: Order Capture & Parsing</h2>
+            <p class="text-center text-slate-600 mb-12 max-w-4xl mx-auto">Because official Swiggy/Zomato APIs are expensive and restrictive, we bypass them using standard communication channels. Here is the exact technical approach for capturing and processing orders.</p>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Step A -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-blue-100 text-blue-800 font-bold px-3 py-1 rounded-bl-lg text-sm">Step 1: Capture</div>
+                    <h3 class="text-xl font-bold mt-4 mb-3 text-slate-800">Email & SMS Interception</h3>
+                    <p class="text-sm text-slate-600 mb-4">We rely on the platform notifications sent to the restaurant:</p>
+                    <ul class="space-y-3 text-sm text-slate-700">
+                        <li class="flex gap-2 items-start"><i class="fa-solid fa-envelope text-blue-500 mt-1"></i> <b>Primary (Email):</b> The restaurant's registered Gmail/Outlook is configured with an auto-forwarding rule. All emails from "orders@swiggy.in" are instantly forwarded to a dedicated system inbox (e.g., ingest@ourkds.com).</li>
+                        <li class="flex gap-2 items-start"><i class="fa-solid fa-comment-sms text-green-500 mt-1"></i> <b>Fallback (SMS Webhook):</b> An old Android phone in the kitchen runs a free "SMS Forwarder" app. It listens for SMS from sender ID "ZOMATO". When a text arrives, the app fires an HTTP POST request containing the raw text to our Laravel `/api/webhooks/sms` endpoint.</li>
+                    </ul>
                 </div>
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                    <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fa-solid fa-clock text-emerald-600 text-xl"></i>
+
+                <!-- Step B -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-orange-100 text-orange-800 font-bold px-3 py-1 rounded-bl-lg text-sm">Step 2: Parsing</div>
+                    <h3 class="text-xl font-bold mt-4 mb-3 text-slate-800">Laravel Regex Engine</h3>
+                    <p class="text-sm text-slate-600 mb-4">Once the raw text enters Laravel, it is passed through platform-specific Regular Expression (Regex) dictionaries.</p>
+                    <div class="bg-slate-800 text-green-400 p-3 rounded text-xs font-mono mb-3 shadow-inner">
+                        // Example Swiggy Regex Pattern<br>
+                        preg_match('/Order ID:\s*(SWG[0-9]+)/', $text, $id);<br>
+                        preg_match_all('/(\d+)x\s*(.*?)(?=\n|$)/', $text, $items);
                     </div>
-                    <h3 class="text-lg font-bold mb-2">Dynamic Aging</h3>
-                    <p class="text-slate-600 text-sm">Automated Green/Yellow/Red visual alerts based on strict timer rules calculated from actual receipt time.</p>
+                    <p class="text-sm text-slate-700">The engine scans the unstructured text, extracting the Order ID, Item list, Quantities, and Special Notes, transforming it into a structured JSON array.</p>
                 </div>
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fa-solid fa-shield-halved text-purple-600 text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold mb-2">Air-tight Fallbacks</h3>
-                    <p class="text-slate-600 text-sm">Built-in manual entry, duplicate prevention, and raw-message logging to ensure zero data loss during rushes.</p>
+
+                <!-- Step C -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-bl-lg text-sm">Step 3: Processing</div>
+                    <h3 class="text-xl font-bold mt-4 mb-3 text-slate-800">Deduplication & MySQL</h3>
+                    <p class="text-sm text-slate-600 mb-4">Before saving, Laravel executes a critical safety check.</p>
+                    <ul class="space-y-3 text-sm text-slate-700">
+                        <li class="flex gap-2 items-start"><i class="fa-solid fa-shield-virus text-purple-500 mt-1"></i> <b>Unique Key Lock:</b> Laravel checks MySQL for a `unique_key` (e.g., "SWIGGY_10523"). If both an SMS and an Email arrive for the same order, the second one is dropped to prevent double-cooking.</li>
+                        <li class="flex gap-2 items-start"><i class="fa-solid fa-database text-blue-500 mt-1"></i> <b>Commit:</b> The clean JSON is inserted into the MySQL `orders` and `order_items` tables. The `received_at` timestamp is hard-locked.</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Architecture & Data Flow -->
-    <section id="architecture" class="py-20 bg-slate-50">
+    <section id="architecture" class="py-20 bg-slate-900 text-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold mb-12 text-center">System Architecture & Data Flow</h2>
+            <h2 class="text-3xl font-bold mb-12 text-center text-white">System Architecture (PHP/Laravel Monolith)</h2>
             
             <div class="relative max-w-5xl mx-auto">
                 <!-- Visual Flow -->
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-12 relative z-10">
                     
                     <!-- Step 1 -->
-                    <div class="arch-box bg-white p-6 rounded-xl shadow-sm border border-slate-200 w-full md:w-1/4 text-center z-10 relative">
-                        <i class="fa-solid fa-envelope-open-text text-3xl text-indigo-500 mb-3"></i>
-                        <h4 class="font-bold text-sm mb-1">1. Capture Layer</h4>
-                        <p class="text-xs text-slate-500">IMAP Email Auto-Forwarding</p>
+                    <div class="arch-box bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-700 w-full md:w-1/4 text-center">
+                        <i class="fa-solid fa-inbox text-3xl text-indigo-400 mb-3"></i>
+                        <h4 class="font-bold text-sm mb-1 text-white">1. Capture Source</h4>
+                        <p class="text-xs text-slate-400">IMAP Mailbox & SMS Webhook</p>
                     </div>
 
-                    <i class="fa-solid fa-arrow-right text-slate-300 hidden md:block"></i>
-                    <i class="fa-solid fa-arrow-down text-slate-300 md:hidden"></i>
+                    <i class="fa-solid fa-arrow-right text-slate-600 hidden md:block"></i>
+                    <i class="fa-solid fa-arrow-down text-slate-600 md:hidden"></i>
 
                     <!-- Step 2 -->
-                    <div class="arch-box bg-white p-6 rounded-xl shadow-sm border border-slate-200 w-full md:w-1/4 text-center z-10 relative">
-                        <i class="fa-solid fa-code-branch text-3xl text-blue-500 mb-3"></i>
-                        <h4 class="font-bold text-sm mb-1">2. Parsing Layer</h4>
-                        <p class="text-xs text-slate-500">Regex Rules -> Structured JSON</p>
+                    <div class="arch-box bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-700 w-full md:w-1/4 text-center">
+                        <i class="fa-brands fa-laravel text-3xl text-red-500 mb-3"></i>
+                        <h4 class="font-bold text-sm mb-1 text-white">2. Laravel Core</h4>
+                        <p class="text-xs text-slate-400">Regex Parser & Task Scheduler</p>
                     </div>
 
-                    <i class="fa-solid fa-arrow-right text-slate-300 hidden md:block"></i>
-                    <i class="fa-solid fa-arrow-down text-slate-300 md:hidden"></i>
+                    <i class="fa-solid fa-arrow-right text-slate-600 hidden md:block"></i>
+                    <i class="fa-solid fa-arrow-down text-slate-600 md:hidden"></i>
 
                     <!-- Step 3 -->
-                    <div class="arch-box bg-white p-6 rounded-xl shadow-sm border border-slate-200 w-full md:w-1/4 text-center z-10 relative">
-                        <i class="fa-solid fa-server text-3xl text-emerald-500 mb-3"></i>
-                        <h4 class="font-bold text-sm mb-1">3. Core Backend</h4>
-                        <p class="text-xs text-slate-500">Node.js/FastAPI + SQLite DB</p>
+                    <div class="arch-box bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-700 w-full md:w-1/4 text-center">
+                        <i class="fa-solid fa-database text-3xl text-blue-400 mb-3"></i>
+                        <h4 class="font-bold text-sm mb-1 text-white">3. Database</h4>
+                        <p class="text-xs text-slate-400">MySQL (Relational Storage)</p>
                     </div>
 
-                    <i class="fa-solid fa-arrow-right text-slate-300 hidden md:block"></i>
-                    <i class="fa-solid fa-arrow-down text-slate-300 md:hidden"></i>
+                    <i class="fa-solid fa-arrow-right text-slate-600 hidden md:block"></i>
+                    <i class="fa-solid fa-arrow-down text-slate-600 md:hidden"></i>
 
                     <!-- Step 4 -->
-                    <div class="arch-box bg-white p-6 rounded-xl shadow-sm border border-slate-200 w-full md:w-1/4 text-center z-10 relative border-b-4 border-b-blue-500">
-                        <i class="fa-solid fa-tv text-3xl text-slate-700 mb-3"></i>
-                        <h4 class="font-bold text-sm mb-1">4. TV Dashboard</h4>
-                        <p class="text-xs text-slate-500">React/HTML (5s Polling)</p>
+                    <div class="arch-box bg-slate-800 p-6 rounded-xl shadow-lg border-b-4 border-b-orange-500 w-full md:w-1/4 text-center">
+                        <i class="fa-solid fa-tv text-3xl text-slate-300 mb-3"></i>
+                        <h4 class="font-bold text-sm mb-1 text-white">4. TV Dashboard</h4>
+                        <p class="text-xs text-slate-400">Blade/Alpine.js (5s AJAX Poll)</p>
                     </div>
                 </div>
 
                 <!-- Technical Spec Table -->
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="bg-slate-800 rounded-2xl shadow-lg border border-slate-700 overflow-hidden">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-slate-100 text-slate-700 text-sm">
-                                <th class="p-4 border-b">Module</th>
-                                <th class="p-4 border-b">Selected Tech</th>
-                                <th class="p-4 border-b">Engineering Rationale (Cost & Reliability)</th>
+                            <tr class="bg-slate-900/50 text-slate-300 text-sm">
+                                <th class="p-4 border-b border-slate-700">Module</th>
+                                <th class="p-4 border-b border-slate-700">Strict Stack Selection</th>
+                                <th class="p-4 border-b border-slate-700">Engineering Rationale</th>
                             </tr>
                         </thead>
                         <tbody class="text-sm">
-                            <tr class="border-b">
-                                <td class="p-4 font-semibold">Capture Source</td>
-                                <td class="p-4 text-blue-600">Backend Email Parser (IMAP)</td>
-                                <td class="p-4 text-slate-600">Order emails are auto-forwarded to a dedicated inbox. A backend cron reads and parses them. 100% web-based architecture, zero mobile apps required.</td>
+                            <tr class="border-b border-slate-700">
+                                <td class="p-4 font-semibold text-white">Background Tasks</td>
+                                <td class="p-4 text-orange-400">Laravel Task Scheduling (Cron)</td>
+                                <td class="p-4 text-slate-400">Native to PHP/Laravel. Triggers the <code class="bg-slate-900 px-1 rounded">php artisan imap:fetch</code> command every minute.</td>
                             </tr>
-                            <tr class="border-b">
-                                <td class="p-4 font-semibold">Backend Framework</td>
-                                <td class="p-4 text-blue-600">Node.js (Express) OR Python (FastAPI)</td>
-                                <td class="p-4 text-slate-600">Highly abundant developer skillsets keep dev costs low. Extremely lightweight for local network hosting.</td>
+                            <tr class="border-b border-slate-700">
+                                <td class="p-4 font-semibold text-white">Backend Framework</td>
+                                <td class="p-4 text-orange-400">PHP 8.x + Laravel 11</td>
+                                <td class="p-4 text-slate-400">Highly robust, structured MVC. Built-in Queues, ORM (Eloquent), and Routing make building the Regex logic and webhooks extremely fast and cheap.</td>
                             </tr>
-                            <tr class="border-b">
-                                <td class="p-4 font-semibold">Database</td>
-                                <td class="p-4 text-blue-600">SQLite (Local file-based)</td>
-                                <td class="p-4 text-slate-600">Zero setup time, zero cloud cost. More than capable of handling 1,000+ orders/day for a single kitchen instance.</td>
-                            </tr>
-                            <tr class="border-b">
-                                <td class="p-4 font-semibold">Frontend Sync</td>
-                                <td class="p-4 text-blue-600">HTTP Polling (Every 5 Seconds)</td>
-                                <td class="p-4 text-slate-600">Cheaper and faster to implement than WebSockets for MVP. Kitchens don't notice a 5-second delay.</td>
+                            <tr class="border-b border-slate-700">
+                                <td class="p-4 font-semibold text-white">Database</td>
+                                <td class="p-4 text-orange-400">MySQL</td>
+                                <td class="p-4 text-slate-400">Strictly MySQL. Handles relational data (Orders -> Items) perfectly. Zero licensing fees, highly scalable for thousands of orders per day.</td>
                             </tr>
                             <tr>
-                                <td class="p-4 font-semibold">Deduplication</td>
-                                <td class="p-4 text-blue-600">Composite Key: <code class="bg-blue-50 px-1 rounded text-xs">platform + order_id</code></td>
-                                <td class="p-4 text-slate-600">Air-tight logic to prevent phantom double-orders if a notification is intercepted twice.</td>
+                                <td class="p-4 font-semibold text-white">Frontend Dashboard</td>
+                                <td class="p-4 text-orange-400">Laravel Blade + Alpine.js</td>
+                                <td class="p-4 text-slate-400">Alpine.js handles the 5-second AJAX polling for new orders directly within the HTML view.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -173,31 +184,97 @@
         </div>
     </section>
 
-    <!-- Data Rules & JSON -->
-    <section id="data-model" class="py-20 bg-white">
+    <!-- End-to-End Operational Workflow -->
+    <section id="workflow" class="py-20 bg-white border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold mb-6">Data Schemas & Logic Rules</h2>
-            <p class="text-slate-600 mb-8 max-w-3xl">To ensure system stability, the backend calculates aging dynamically based on strict ISO timestamps. Hardcoded visual states from parsing are forbidden.</p>
+            <h2 class="text-3xl font-bold mb-4 text-center">End-to-End Operational Workflow</h2>
+            <p class="text-center text-slate-600 mb-16 max-w-3xl mx-auto">A step-by-step lifecycle of a single order—from the moment a customer clicks "Buy" to the moment the food leaves your kitchen.</p>
+
+            <div class="max-w-4xl mx-auto relative border-l-4 border-orange-100 pl-8 space-y-12">
+                
+                <!-- Step 1 -->
+                <div class="relative">
+                    <div class="absolute -left-[43px] top-0 h-8 w-8 rounded-full bg-blue-100 border-4 border-white flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-mobile-screen-button text-blue-600 text-xs"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800">1. The Trigger (Order Placement)</h3>
+                    <p class="text-slate-600 mt-2">A customer places an order on Swiggy or Zomato. The delivery platform's internal system automatically generates a standard notification (Email or SMS) and sends it to the restaurant's registered contact details.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative">
+                    <div class="absolute -left-[43px] top-0 h-8 w-8 rounded-full bg-indigo-100 border-4 border-white flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-magnet text-indigo-600 text-xs"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800">2. Silent Interception</h3>
+                    <p class="text-slate-600 mt-2">Without any human intervention, the system captures this notification. If it's an email, an auto-forwarding rule instantly routes it to our Laravel IMAP inbox. If it's an SMS, the kitchen's fallback Android device catches the text and immediately fires a webhook to the Laravel API.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative">
+                    <div class="absolute -left-[43px] top-0 h-8 w-8 rounded-full bg-purple-100 border-4 border-white flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-gears text-purple-600 text-xs"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800">3. Extraction & DB Lock</h3>
+                    <p class="text-slate-600 mt-2">The Laravel backend takes the raw, messy text and runs it through the Regex Engine. It extracts the exact Order ID, platform name, timestamp, and item list. It then queries the MySQL database. If the <code class="bg-slate-100 px-1 rounded text-sm text-purple-700">unique_key</code> doesn't exist yet, it inserts the order with <code class="bg-slate-100 px-1 rounded text-sm text-purple-700">status = 'new'</code>.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="relative">
+                    <div class="absolute -left-[43px] top-0 h-8 w-8 rounded-full bg-orange-100 border-4 border-white flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-tv text-orange-600 text-xs"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800">4. TV Display Broadcast</h3>
+                    <p class="text-slate-600 mt-2">Within 5 seconds, the Alpine.js frontend (running continuously on the kitchen TV) polls the backend and detects the new record. The order instantly pops up on the screen as a large, readable card, alerting the chefs to begin prep.</p>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="relative">
+                    <div class="absolute -left-[43px] top-0 h-8 w-8 rounded-full bg-red-100 border-4 border-white flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-hourglass-half text-red-600 text-xs"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800">5. Live Aging & Color Shifting</h3>
+                    <p class="text-slate-600 mt-2">As the kitchen staff cooks, the timer on the order card ticks upwards. Alpine.js constantly calculates the time difference. At 0-5 minutes, the card is <span class="font-bold text-emerald-500">Green</span>. At 6 minutes, it automatically turns <span class="font-bold text-yellow-500">Yellow</span>. If it passes 11 minutes, it flashes <span class="font-bold text-red-500">Red</span>, indicating an urgent delay.</p>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="relative">
+                    <div class="absolute -left-[43px] top-0 h-8 w-8 rounded-full bg-emerald-100 border-4 border-white flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-check-double text-emerald-600 text-xs"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800">6. Order Completion & Clearance</h3>
+                    <p class="text-slate-600 mt-2">Once the food is packed and ready for the delivery partner, a kitchen staff member clicks the <b>"Ready / Done"</b> button on the dashboard using a connected mouse or touch display. This sends a quick AJAX request to Laravel, updating the MySQL status to <code class="bg-slate-100 px-1 rounded text-sm text-emerald-700">'completed'</code>. The order instantly vanishes from the active TV queue, keeping the screen clean for the next rush.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Rules & JSON -->
+    <section id="data-model" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-6">Data Conversion & Logic Map</h2>
+            <p class="text-slate-600 mb-8 max-w-3xl">The Laravel parser outputs a strict JSON structure. The Blade frontend relies entirely on system-calculated timestamps to apply visual colors, avoiding static data traps.</p>
 
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Order JSON -->
                 <div>
                     <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-file-code text-blue-500"></i> Standardized Order JSON
+                        <i class="fa-solid fa-file-code text-orange-500"></i> Standardized Parsed Output
                     </h3>
-                    <div class="code-block p-6 rounded-xl overflow-x-auto text-sm font-mono shadow-inner">
+                    <div class="code-block p-6 rounded-xl overflow-x-auto text-sm font-mono shadow-lg border border-slate-800">
 <pre><code>{
-  "order_id": "SWG101",
+  "order_id": "SWG-891102",
   "platform": "Swiggy",
-  "source_type": "notification",
-  "unique_key": "Swiggy_SWG101",
-  "customer_name": "Rahul",
+  "source_type": "email_imap",
+  "unique_key": "SWIGGY_SWG-891102",
+  "customer_name": "Priya",
   "items": [
-    { "name": "Burger", "qty": 2 },
-    { "name": "Fries", "qty": 1 }
+    { "name": "Butter Chicken", "qty": 1 },
+    { "name": "Garlic Naan", "qty": 3 }
   ],
-  "notes": "No onion",
-  "received_at": "2026-04-03T19:00:00+05:30",
+  "notes": "Extra spicy please",
+  "received_at": "2026-04-03 14:05:00",
   "status": "new",
   "is_manual_entry": false,
   "parse_status": "success"
@@ -208,11 +285,11 @@
                 <!-- Color Rules JSON -->
                 <div>
                     <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-palette text-purple-500"></i> Dynamic Aging Logic Map
+                        <i class="fa-solid fa-palette text-purple-500"></i> Alpine.js Frontend Logic Map
                     </h3>
-                    <div class="code-block p-6 rounded-xl overflow-x-auto text-sm font-mono shadow-inner">
+                    <div class="code-block p-6 rounded-xl overflow-x-auto text-sm font-mono shadow-lg border border-slate-800">
 <pre><code>{
-  "color_rules": {
+  "color_thresholds": {
     "green": { 
        "state": "Fresh",
        "min_minutes": 0, 
@@ -231,179 +308,113 @@
   }
 }</code></pre>
                     </div>
-                    <div class="mt-4 bg-yellow-50 border border-yellow-200 p-4 rounded-lg text-sm text-yellow-800">
-                        <strong>Rule:</strong> The backend calculates <code>elapsed_minutes</code> = <code>Current_IST_Time - received_at</code>. The frontend simply maps this integer to the visual color.
+                    <div class="mt-4 bg-orange-50 border border-orange-200 p-4 rounded-lg text-sm text-orange-800">
+                        <strong>Rule:</strong> The Laravel API returns `received_at`. Alpine.js calculates `elapsed_minutes` = `Now() - received_at` locally every second, ensuring the Green/Yellow/Red card colors shift accurately in real-time without slamming the server.
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- UI/UX Rules -->
-    <section id="ui-design" class="py-20 bg-slate-900 text-white">
+    <!-- UI Rules (Brief visual demo) -->
+    <section class="py-12 bg-white border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold mb-12 text-center">Dashboard UI/UX Behavior</h2>
-            
-            <div class="grid md:grid-cols-3 gap-6 mb-12">
-                <!-- Green Card Spec -->
-                <div class="bg-slate-800 rounded-xl p-1 border-t-4 border-emerald-500">
-                    <div class="bg-emerald-500/10 p-5 h-full rounded-b-lg">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <span class="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">SWIGGY</span>
-                                <h4 class="font-bold text-lg mt-2">#SWG101</h4>
-                            </div>
-                            <div class="text-emerald-400 font-mono text-xl font-bold">03:45</div>
-                        </div>
-                        <ul class="text-sm text-slate-300 space-y-2 mb-4">
-                            <li>2x Classic Burger</li>
-                            <li>1x Peri Fries <span class="text-red-400 text-xs">(No Onion)</span></li>
-                        </ul>
-                        <div class="grid grid-cols-2 gap-2 mt-auto">
-                            <button class="bg-slate-700 hover:bg-slate-600 text-white text-sm py-2 rounded transition">Start</button>
-                            <button class="bg-emerald-600 hover:bg-emerald-500 text-white text-sm py-2 rounded transition">Ready</button>
-                        </div>
-                    </div>
+            <h2 class="text-2xl font-bold mb-8 text-center">Dashboard Interface Standard</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Card Examples (Stylized for demo) -->
+                <div class="bg-slate-50 border-l-4 border-emerald-500 p-5 rounded-lg shadow-sm">
+                    <div class="flex justify-between items-start mb-3"><span class="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">SWIGGY</span><span class="text-emerald-600 font-bold font-mono">03:45</span></div>
+                    <h4 class="font-bold text-lg mb-2">#SWG-8911</h4><p class="text-sm text-slate-600">1x Butter Chicken<br>3x Garlic Naan</p>
                 </div>
-
-                <!-- Yellow Card Spec -->
-                <div class="bg-slate-800 rounded-xl p-1 border-t-4 border-yellow-500 shadow-[0_0_15px_rgba(234,179,8,0.2)]">
-                    <div class="bg-yellow-500/10 p-5 h-full rounded-b-lg">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">ZOMATO</span>
-                                <h4 class="font-bold text-lg mt-2">#ZOM892</h4>
-                            </div>
-                            <div class="text-yellow-400 font-mono text-xl font-bold">08:12</div>
-                        </div>
-                        <ul class="text-sm text-slate-300 space-y-2 mb-4">
-                            <li>1x Veg Pizza</li>
-                            <li>2x Coke</li>
-                        </ul>
-                        <div class="grid grid-cols-2 gap-2 mt-auto">
-                            <button class="bg-slate-700 hover:bg-slate-600 text-white text-sm py-2 rounded transition">Start</button>
-                            <button class="bg-emerald-600 hover:bg-emerald-500 text-white text-sm py-2 rounded transition">Ready</button>
-                        </div>
-                    </div>
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-5 rounded-lg shadow-sm">
+                    <div class="flex justify-between items-start mb-3"><span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">ZOMATO</span><span class="text-yellow-600 font-bold font-mono">08:12</span></div>
+                    <h4 class="font-bold text-lg mb-2">#ZOM-4421</h4><p class="text-sm text-slate-600">2x Veg Biryani</p>
                 </div>
-
-                <!-- Red Card Spec -->
-                <div class="bg-slate-800 rounded-xl p-1 border-t-4 border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.3)]">
-                    <div class="bg-red-500/10 p-5 h-full rounded-b-lg">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <span class="bg-slate-600 text-white text-xs font-bold px-2 py-1 rounded">MANUAL</span>
-                                <h4 class="font-bold text-lg mt-2">#MAN001</h4>
-                            </div>
-                            <div class="text-red-400 font-mono text-xl font-bold animate-pulse">14:30</div>
-                        </div>
-                        <ul class="text-sm text-slate-300 space-y-2 mb-4">
-                            <li>3x Garlic Bread</li>
-                        </ul>
-                        <div class="grid grid-cols-2 gap-2 mt-auto">
-                            <button class="bg-slate-700 hover:bg-slate-600 text-white text-sm py-2 rounded transition">Start</button>
-                            <button class="bg-emerald-600 hover:bg-emerald-500 text-white text-sm py-2 rounded transition">Ready</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8 text-sm">
-                <div>
-                    <h4 class="text-emerald-400 font-bold mb-2 flex items-center gap-2"><i class="fa-solid fa-check-circle"></i> Required Dashboard Rules</h4>
-                    <ul class="space-y-2 text-slate-300 list-disc pl-5">
-                        <li><strong>Oldest First:</strong> Active orders strictly sorted by oldest `received_at` timestamp.</li>
-                        <li><strong>Readability:</strong> Text must be legible from 6–10 feet away. High contrast.</li>
-                        <li><strong>Status Flow:</strong> New → Start → Ready → Done. 'Done' and 'Cancelled' vanish from active view immediately.</li>
-                        <li><strong>Auto-Refresh:</strong> Polling occurs without page reload. If connection drops, a visible "Offline" banner appears.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-red-400 font-bold mb-2 flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation"></i> Failure Handling (Edge Cases)</h4>
-                    <ul class="space-y-2 text-slate-300 list-disc pl-5">
-                        <li><strong>Parse Failure:</strong> If parser breaks, save raw text to DB and display a "PARSE ERROR" blank card for manual review.</li>
-                        <li><strong>Missed Capture:</strong> A "Add Manual Order" floating action button (FAB) allows 10-second manual entry.</li>
-                        <li><strong>Massive Rush:</strong> UI must handle vertical scrolling cleanly if >12 orders are active.</li>
-                    </ul>
+                <div class="bg-red-50 border-l-4 border-red-500 p-5 rounded-lg shadow-sm animate-pulse">
+                    <div class="flex justify-between items-start mb-3"><span class="bg-slate-700 text-white text-xs font-bold px-2 py-1 rounded">MANUAL</span><span class="text-red-600 font-bold font-mono">14:30</span></div>
+                    <h4 class="font-bold text-lg mb-2">#MAN-001</h4><p class="text-sm text-slate-600">1x Coke</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Budget & Execution Plan -->
-    <section id="budget" class="py-20 bg-white">
+    <section id="budget" class="py-20 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold mb-4">The ₹2.0 Lakh Budget & Execution Plan</h2>
-                <p class="text-slate-600">A realistic, air-tight breakdown proving feasible execution without compromising core reliability.</p>
+                <h2 class="text-3xl font-bold mb-4">The ₹2.0 Lakh Cap Execution Plan</h2>
+                <p class="text-slate-600">Streamlined PHP/Laravel architecture minimizes development overhead, creating a massive safety buffer for edge-case testing.</p>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-12">
                 <!-- Budget Breakdown -->
                 <div>
-                    <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200">
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
                         <h3 class="text-xl font-bold mb-6 flex items-center justify-between">
                             <span>Cost Breakdown</span>
-                            <span class="text-blue-600 font-mono text-lg">Total: ₹1,50,000</span>
+                            <span class="text-orange-600 font-mono text-lg">Allocated: ₹1,50,000</span>
                         </h3>
                         
                         <div class="space-y-4">
-                            <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
                                 <div>
-                                    <div class="font-semibold text-slate-800">Backend & Parser Dev (MVP)</div>
-                                    <div class="text-xs text-slate-500">Node/FastAPI, SQLite, Regex engine</div>
-                                </div>
-                                <div class="font-mono font-medium">₹30,000</div>
-                            </div>
-                            <div class="flex justify-between items-center border-b border-slate-200 pb-3">
-                                <div>
-                                    <div class="font-semibold text-slate-800">Frontend Dashboard UI</div>
-                                    <div class="text-xs text-slate-500">React/HTML, Polling, Color logic</div>
-                                </div>
-                                <div class="font-mono font-medium">₹25,000</div>
-                            </div>
-                            <div class="flex justify-between items-center border-b border-slate-200 pb-3">
-                                <div>
-                                    <div class="font-semibold text-slate-800">Capture Layer Dev</div>
-                                    <div class="text-xs text-slate-500">IMAP Email Parsing / Webhook Script</div>
+                                    <div class="font-semibold text-slate-800">Backend Core Dev</div>
+                                    <div class="text-xs text-slate-500">Laravel MVC, MySQL schema, Webhooks</div>
                                 </div>
                                 <div class="font-mono font-medium">₹20,000</div>
                             </div>
-                            <div class="flex justify-between items-center pb-1">
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
                                 <div>
-                                    <div class="font-semibold text-slate-800">Buffer / Testing / Contingency</div>
-                                    <div class="text-xs text-slate-500">Extensive safety net for rigorous edge-case testing</div>
+                                    <div class="font-semibold text-slate-800">Regex Engine & Capture Layer</div>
+                                    <div class="text-xs text-slate-500">PHP IMAP integration & Dictionary logic</div>
                                 </div>
-                                <div class="font-mono font-medium text-slate-500">₹75,000</div>
+                                <div class="font-mono font-medium">₹15,000</div>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                                <div>
+                                    <div class="font-semibold text-slate-800">Frontend UI Dashboard</div>
+                                    <div class="text-xs text-slate-500">Blade Templates, Alpine.js AJAX Polling</div>
+                                </div>
+                                <div class="font-mono font-medium">₹15,000</div>
+                            </div>
+                            <div class="flex justify-between items-center bg-slate-50 p-3 rounded border border-slate-200">
+                                <div>
+                                    <div class="font-bold text-slate-800">Testing / Contingency Buffer</div>
+                                    <div class="text-xs text-slate-500">Crucial for perfecting the Regex parsing across hundreds of edge-cases</div>
+                                </div>
+                                <div class="font-mono font-bold text-orange-600">₹1,00,000</div>
                             </div>
                         </div>
-                        <div class="mt-6 text-xs text-slate-500 italic text-right">Leaves ₹50,000 completely untouched under the 2L cap (Total buffer effectively ₹1.25L). Hardware excluded.</div>
+                        <div class="mt-4 text-xs font-semibold text-emerald-600 bg-emerald-50 p-3 rounded text-center">
+                            Total Dev Cost: ₹50,000. <br>
+                            Leaves an additional ₹50,000 completely untouched under the 2L cap.
+                        </div>
                     </div>
                 </div>
 
                 <!-- Phased Implementation -->
                 <div>
-                    <h3 class="text-xl font-bold mb-6">Development Roadmap (4 Weeks)</h3>
-                    <div class="relative border-l-2 border-blue-100 pl-6 space-y-8">
+                    <h3 class="text-xl font-bold mb-6">Development Roadmap (3-4 Weeks)</h3>
+                    <div class="relative border-l-2 border-orange-200 pl-6 space-y-8">
                         <div class="relative">
-                            <div class="absolute -left-[33px] top-1 h-4 w-4 rounded-full bg-blue-500 border-4 border-white"></div>
-                            <h4 class="font-bold text-slate-800">Week 1: Data Capture & Parsing</h4>
-                            <p class="text-sm text-slate-600 mt-1">Develop the IMAP email listener. Extract 50 sample real-world order emails and perfect the Regex rules to achieve >98% accuracy on test data.</p>
+                            <div class="absolute -left-[33px] top-1 h-4 w-4 rounded-full bg-orange-500 border-4 border-white shadow-sm"></div>
+                            <h4 class="font-bold text-slate-800">Week 1: MySQL & Data Ingestion</h4>
+                            <p class="text-sm text-slate-600 mt-1">Setup Laravel environment and MySQL database schemas. Build the PHP IMAP scheduled command to fetch emails, and the API webhook for SMS inputs.</p>
                         </div>
                         <div class="relative">
-                            <div class="absolute -left-[33px] top-1 h-4 w-4 rounded-full bg-blue-500 border-4 border-white"></div>
-                            <h4 class="font-bold text-slate-800">Week 2: Core Backend & DB</h4>
-                            <p class="text-sm text-slate-600 mt-1">Setup local SQLite database. Build REST endpoints for receiving parsed data, updating statuses, and manual fallback entry. Implement unique key checks.</p>
+                            <div class="absolute -left-[33px] top-1 h-4 w-4 rounded-full bg-orange-500 border-4 border-white shadow-sm"></div>
+                            <h4 class="font-bold text-slate-800">Week 2: Regex Engine & API</h4>
+                            <p class="text-sm text-slate-600 mt-1">Develop the heavy logic: Regex parsing rules for Swiggy/Zomato. Implement the `unique_key` duplicate protection and JSON transformation pipeline.</p>
                         </div>
                         <div class="relative">
-                            <div class="absolute -left-[33px] top-1 h-4 w-4 rounded-full bg-blue-500 border-4 border-white"></div>
-                            <h4 class="font-bold text-slate-800">Week 3: TV Dashboard UI</h4>
-                            <p class="text-sm text-slate-600 mt-1">Build the frontend grid. Implement 5-second polling loop and dynamic color calculation based on timestamps. Add large status buttons.</p>
+                            <div class="absolute -left-[33px] top-1 h-4 w-4 rounded-full bg-orange-500 border-4 border-white shadow-sm"></div>
+                            <h4 class="font-bold text-slate-800">Week 3: Blade/Alpine Frontend</h4>
+                            <p class="text-sm text-slate-600 mt-1">Build the server-rendered view. Implement Alpine.js to poll `/api/orders` every 5 seconds and calculate dynamic card colors natively in the browser.</p>
                         </div>
                         <div class="relative">
-                            <div class="absolute -left-[33px] top-1 h-4 w-4 rounded-full bg-emerald-500 border-4 border-white"></div>
-                            <h4 class="font-bold text-slate-800">Week 4: Stress Testing & Install</h4>
-                            <p class="text-sm text-slate-600 mt-1">Simulate a friday night rush (50+ rapid orders). Test manual entry flow. Deploy on local Mini PC connected to kitchen TV.</p>
+                            <div class="absolute -left-[33px] top-1 h-4 w-4 rounded-full bg-emerald-500 border-4 border-white shadow-sm"></div>
+                            <h4 class="font-bold text-slate-800">Week 4: QA & Edge Case Padding</h4>
+                            <p class="text-sm text-slate-600 mt-1">Utilize the extensive buffer budget to run hundreds of dummy emails/SMS through the system to ensure the Regex parser never breaks during a Friday night rush.</p>
                         </div>
                     </div>
                 </div>
@@ -414,8 +425,8 @@
     <!-- Footer -->
     <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm">
         <div class="max-w-7xl mx-auto px-4">
-            <p>Designed per strict low-cost MVP requirements. Focus on operational reliability over prestige architecture.</p>
-            <p class="mt-2">Generated for execution within ₹2,00,000 INR constraint.</p>
+            <p>Strictly PHP/Laravel + MySQL. No Node.js, No Python, No SQLite, No React.</p>
+            <p class="mt-2">Engineered for maximum reliability within a ₹2,00,000 INR constraint.</p>
         </div>
     </footer>
 
